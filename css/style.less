@@ -1,0 +1,481 @@
+@import "base.less";
+// 保险详情planbook
+//commonStyle
+.m30{
+	.mr(0.3rem);
+	.ml(0.3rem);
+	.mb(0.4rem);
+	background: @bgWhite;
+	box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
+  border-radius: 0.08rem;
+}
+.mr15{
+	.mr(0.15rem);
+}
+//标签样式
+body{
+	width: 100%;
+	height: 100%;
+}
+.planbook{
+	background-color: @bgBlue;
+	width: 100%;
+	height: 100%;
+  overflow: hidden;
+}
+//保险信心
+.guarantee{
+	.pl(0.3rem);
+	.pr(0.3rem);
+	position: relative;
+	.customerInfo{
+		color: #6AADD7;
+		font-family: STHeitiSC-Light;
+		font-size: 0.36rem;
+		text-align: center;
+		width: 100%;
+		.pt(0.3rem);
+		.pb(0.23rem);
+	}
+	&:after{
+		display: block;
+		content: "";
+		position: absolute;
+		.wh(1.07rem,0.07rem);
+		background: url(../img/planbook/Group.png) no-repeat left center;
+		top: 0.45rem;
+		left:0.2rem;
+	}
+	&:before{
+		display: block;
+		content: "";
+		position: absolute;
+		.wh(1.07rem,0.07rem);
+		background: url(../img/planbook/Group2.png) no-repeat right center;
+		top: 0.45rem;
+		right: 0.2rem;
+	}
+}
+.guarDetaUl{
+	width: 100%;
+	border-radius: 0.08rem;
+	.guarDetaLi{
+		width: 50%;
+		background-color: @bgYellow;
+		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		&:nth-child(1){
+			border-right: 1px solid #EEDDB0;
+		}
+		&:nth-child(3){
+			border-top:1px solid #EEDDB0;
+			border-right: 1px solid #EEDDB0;
+		}
+		&:nth-child(4){
+			border-top: 1px solid #EEDDB0;
+		}
+		p{
+			text-align: center;
+			font-size: @fontSize24;
+		}
+		.guarDetaLiTitle{
+			color: #A77D61;
+			.mt(0.3rem);
+			.mb(0.1rem);
+		}
+		.guarDetaLiNum{
+			color: #F15D5D;
+			.mb(0.25rem);
+			i{
+				font-size: 0.36rem;
+			}
+		}
+	}
+}
+//被保人信息
+/*------被保人年龄-------*/
+.customer .customerage{
+	width: 100%;
+	text-align: center;
+	.recognizee{
+		background: rgba(240,240,240,0.6);
+		border-radius: 8px 8px 0 0;
+		font-size: @fontSize32;
+		color: #303030;
+		.hc(0.94rem);
+		i{
+			font-size: @fontSize32;
+			select{
+				display: inline-block;
+				width: 30%;
+				padding-left: 4%;
+				padding-right: 28px;
+				box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				vertical-align: middle;
+				/*background: #FFFFFF url(../img/planbook/down.png) no-repeat right top;
+				background-size: 32% 100%;*/
+				color: #6AADD7;
+				border:none;
+				border-radius: 0.08rem;
+				-webkit-border-radius: 0.08rem;
+				-webkit-appearance:none;
+				.hc(0.48rem);
+				background: #FFFFFF url(../img/planbook/arrowDown.png) no-repeat right top;
+				background-size: 0.4rem 0.48rem;
+			}
+		}
+	}
+}
+.age_up{
+	background: #FFFFFF url(../img/planbook/btns.png) no-repeat right top;
+	background-size: 32% 100%;
+}
+/*----------------*/
+.slideSection #incomeList{
+	margin:0.3rem 0.3rem 0;
+	background: @bgYellow;
+  border-radius: 0.08rem;
+	li{
+		margin: 0 0.5rem;
+    box-sizing: border-box;
+		border-bottom: 1px solid #EEDDB0;
+	  .hc(0.6rem);
+		font-size: @fontSize24;
+    color: #A77D61;
+		em{
+			width: 50%;
+			float: left;
+			box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			span{
+				color: #F15D5D;
+			}
+			&.incomeLeft{
+				text-align: left;
+				padding-left: 0.1rem;
+			}
+			&.incomeRight{
+				text-align: right;
+				padding-right: 0.1rem;
+			}
+		}
+		&:last-child{
+			border-bottom:none;
+		}
+	}
+}
+/*-----------滑动控件-------------*/
+#incomeSlider{
+	#slider_container{
+		display: -webkit-box;
+	}
+	margin: 0.3rem  0.3rem 0;
+	padding-bottom: 0.3rem;
+	.controller_bar_1{
+		width:0.4rem;
+		height:0.4rem;
+		background-image:url(../img/planbook/reduce.png);
+		background-repeat:no-repeat;
+		background-size:0.4rem ;
+		/*background-position:0 .5rem;*/
+	}
+	.controller_bar_2{
+		width:0.4rem;
+		height:0.4rem;
+		background-image:url(../img/planbook/add.png);
+		background-repeat:no-repeat;
+		background-size:0.4rem 0.4rem;
+	}
+}
+#slider {
+	margin: 0.16rem 0.3rem;
+	background-color:#F7F7F7 ;
+	border-radius: 0.04rem;
+	-webkit-box-flex: 1;
+	height: 0.08rem;
+  position: relative;
+	.ui-slider-handle{
+		background: url(../img/planbook/btns.png) no-repeat left top;
+		background-size: 0.44rem 0.3rem;
+		position:absolute;
+		top:-0.11rem;
+		width:0.44rem;
+		height:0.3rem;
+	}
+	.ui-slider-range{
+		background-color:#FFF1CB ;
+		height: 0.08rem;
+	}
+}
+.incomeTip1{
+	margin:0.15rem 0 0.3rem;
+	font-size: 0.2rem;
+  color: #969696;
+	text-align:center;
+}
+.incomeTip2{
+	background:@bgBlue;
+	color: #fff;
+	border-radius: 0.08rem;
+	.wh(3.42rem,0.46rem);
+	line-height: 0.46rem;
+	font-size: @fontSize24;
+	margin:0 auto;
+}
+//84种重大疾病
+.illnessBox{
+	padding: 0.2rem 0.4rem;
+	.mb(0rem);
+	position: relative;
+	z-index: 2;
+}
+.illness{
+	font-size: @fontSize32;
+	color: @font30;
+	.hc(0.46rem);
+}
+.illnessDetail{
+	background: @bgBlue;
+	border-radius:0.08rem;
+	.wh(1.78rem,0.46rem);
+	line-height: 0.46rem;
+	color: #fff;
+	font-size: @fontSize24;
+	padding: 0 0.25rem;
+	.bz-bb();
+	i{
+		.wh(0.2rem,0.1rem);
+		.pl(0.1rem);
+		background: url(../img/planbook/triangleDown.png) no-repeat;
+		background-size: 0.2rem 0.1rem;
+		background-position:  0.1rem center;
+		display: inline-block;
+		&.active{
+			background: url(../img/planbook/triangleUp.png) no-repeat;
+		}
+	}
+}
+//下拉疾病列表
+.checkDetailBtn{
+	margin: 0 0.6rem;
+	width:5.2rem;
+	background: @bgWhite;
+	display: none
+}
+#illBox2{
+	height: 2.86rem;
+	background: #FFFFFF;
+	padding-top: 0.3rem;
+}
+.checkDetailBtn .protectdetailContain{
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+	li{
+		margin: 0 0.27rem;
+		border-bottom: 1px solid @borderF0;
+		font-size: 0.2rem;
+		color: font6B;
+		.pl(0.15rem);
+		.pt(0.15rem);
+		.pb(0.15rem);
+		&.rank3{
+			.pl(0.3rem);
+		}
+		&.rank4{
+			.pl(0.6rem);
+		}
+	}
+	p{
+		margin: 0 0.27rem;
+		font-size: 0.2rem;
+		color: font6B;
+	}
+	.divRank{
+		margin: 0 0.27rem;
+	}
+	.rankTable{
+		width: 100%;
+		margin-top: 0.12rem;
+		border-collapse:collapse;
+		font-size: 0.2rem;
+		.bz-bb();
+		td{
+			border: 1px solid @font30;
+			.hc(0.48rem);
+			text-align: center;
+		}
+		tr:first-child td:nth-child(1),tr:first-child  td:nth-child(2){
+			background: @bgBlue;
+		}
+	}
+}
+//白边
+.read_up {
+		margin: 0 0.6rem 0.4rem;
+		.wh(5.2rem,0.3rem);
+    background: url(../img/planbook/lace.png) no-repeat left bottom;
+    background-size: 100% 100%;
+
+}
+//底部提示
+.footerTip{
+	background-color: @bgBlue;
+	font-size: fontSize24;
+	color: #212B32;
+	.mr(0.3rem);
+	.ml(0.3rem);
+	.mb(0.4rem);
+}
+.tele{
+	background: #F15D5D;
+	box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
+	border-radius: 0.08rem;
+	.hc(0.9rem);
+	text-align: center;
+	margin: 0.3rem;
+	a{
+
+		color: #fff;
+		font-size: 0.36rem;
+	}
+
+}
+
+
+//信息输入
+.customerImport{
+	.wh(100%,100%);
+	color: @font30;
+	font-size: @fontSize32;
+	background: #fff;
+	.companyInfo{
+		.hc(0.88rem);
+		text-align: center;
+		.mb(0.2rem);
+	}
+	.customerTitle{
+		.hc(0.96rem);
+		text-align: center;
+		color: #68BDF2;
+		border-bottom: 1px solid @borderF0;
+	}
+	.companyInfoUl{
+		margin: 0 0.3rem;
+		li{
+			.liLeft{
+				height: 0.32rem;
+		    line-height: 0.32rem;
+		    margin: 0.32rem 0;
+				.pr(0.3rem);
+				border-right:1px solid @borderF0 ;
+				width: 1.38rem;
+				text-align:justify;
+	      span{
+					display: inline-block; /* Opera */
+					padding-left: 100%;
+				}
+			}
+			.liRight{
+				.pl(0.3rem);
+				height: 0.32rem;
+		    line-height: 0.32rem;
+		    margin: 0.32rem 0;
+			}
+			.hc(0.96rem);
+			border-bottom:1px solid @borderF0 ;
+			.radioSex{
+				color: @bgBlue;
+			}
+			select{
+				display: inline-block;
+				width: 1.8rem;
+				padding-left: 4%;
+				padding-right: 28px;
+				box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				vertical-align: middle;
+				/*background: #FFFFFF url(../img/planbook/down.png) no-repeat right top;
+				background-size: 32% 100%;*/
+				color: @font30;
+				border-radius: 0.08rem;
+				-webkit-border-radius: 0.08rem;
+				.hc(0.48rem);
+			}
+			.radio{
+		    padding-left: 0.4rem;
+				margin-right: 0.05rem;
+		    line-height: 0.32rem;
+		    height: 0.32rem;
+		    cursor: pointer;
+		    font-size: 0.3rem;;
+				position: relative;
+				display: inline-block;
+			}
+			.radio input {
+		    position: absolute;
+		    left: -9999px;
+			}
+			.radio i {
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    display: block;
+		    width: 0.3rem;
+		    height: 0.3rem;
+		    border-width: 1px;
+		    border-style: solid;
+				border-color: #D8D8D8;
+		    background: #fff;
+				border-radius: 50%;
+			}
+			.radio input+i:after {
+			    content: '';
+			    top: 0.08rem;
+			    left: 0.08rem;
+			    width: 0.14rem;
+			    height: 0.14rem;
+			    border-radius: 50%;
+			    background-color: #fff;
+					position: absolute;
+					border-color: #D8D8D8;
+			}
+			.radio input:checked+i:after {
+		    background-color: @bgBlue;
+			}
+			.radio input:checked+i {
+		    border-color: #D8D8D8;
+			}
+		}
+	}
+	.coverageTip{
+		font-size: @fontSize24;
+		color: #969696;
+		.mt(0.2rem);
+		text-align: center;
+		}
+	}
+	footer{
+		position: fixed;
+		bottom: 0;
+		border-top:1px solid @borderF0 ;
+		background: #fff;
+		.wh(100%,0.98rem);
+		.totalPremium{
+			.pl(0.3rem);
+			line-height: 0.98rem;
+			font-size: 0.32rem;
+			color:@bgBlue;
+			.bz-bb();
+
+		}
+		.doPlan{
+			font-size: @fontSize32;
+			color: #FFFFFF;
+			background: @bgBlue;
+			text-align: center;
+			.hc(0.98rem);
+			padding:0 0.3rem;
+		}
+}

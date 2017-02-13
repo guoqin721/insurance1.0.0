@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="format-detection" content="email=no" />
+  <meta name="format-detection" content="address=no" />
+  <meta name="format-detection" content="date=no" />
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <title>生成计划书</title>
+  <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/jquery.min.js" charset="utf-8"></script>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    var customerSex = $('.radioSex:checked').val();
+    var customerSmoke = $('.radioSmoke:checked').val();
+    var customerYears =$('.radioYears:checked').val();
+    var customerAge = $('#customerAge option:selected').val();
+    total();
+    $('#customerAge').on('change',function(){
+      customerAge = $('#customerAge option:selected').val();
+      if (customerAge <= 16) {
+        $('.radioSmokeN').attr('checked','checked');
+        $('.radioSmokeY').attr('disabled','disabled');
+        $('.radioSmokeY').parent().click(function(){
+        });
+      } else {
+        $('.radioSmokeY').removeAttr('disabled','disabled');
+      }
+    })
+    $('.radioSex').on('change',function(){
+      customerSex = $('.radioSex:checked').val();
+      total();
+    })
+    $('.radioSmoke').on('change',function(){
+      customerSmoke = $('.radioSmoke:checked').val();
+      total();
+    })
+    $('.radioYears').on('change',function(){
+      customerYears =$('.radioYears:checked').val();
+      total();
+    })
+    $('.doPlan').click(function(event) {
+      window.location.href = "planbook.html?customerSex=" + customerSex + "&customerSmoke=" + customerSmoke + "&customerYears=" + customerYears + "&customerAge=" + customerAge;
+    });
+    //更新数据
+    function total(){
+      var type = '';
+      var ytpeSmoke = '';
+      var typeSex = '';
+      if (customerSex == "女") {
+        typeSex = "F";
+      } else {
+        typeSex = "M";
+      }
+      if (customerSmoke == "吸烟") {
+        ytpeSmoke = "Y";
+      } else {
+        ytpeSmoke = "N";
+      }
+      type  = typeSex + ytpeSmoke;
+      $.ajax({
+        url: 'http://api.fundusd.com/v1/insurance/plans/pep?period='+ customerYears + '&age=' + customerAge + '&type=' + type,
+        type: 'GET',
+        success:function(data){
+          $('#premium').html(data[parseInt(customerAge) + 1].total);
+        },
+        error:function(){
+          console.log("error");
+        }
+      });
+    }
+    //自杀函数
+  });
+
+  </script>
+</head>
+<body>
+  <section class="customerImport">
+    <div class="companyInfo">
+      产品详情
+    </div>
+    <div class="customerTitle">
+      投保人信息
+    </div>
+    <form class="" action="" method="post">
+      <ul class="companyInfoUl">
+        <li class="clr">
+          <div class="liLeft sex flt">
+            性别<span></span>
+          </div>
+          <div class="liRight flt">
+            <label class="radio"  for="male"><input type="radio" name="sex" class="radioSex" value="男" id="male" checked="checked"><i></i>男</label>
+            <label class="radio"  for="female"><input type="radio" name="sex" class="radioSex" id="female"value="女"><i></i>女</label>
+          </div>
+        </li>
+        <li class="clr">
+          <div class="liLeft sex flt">
+            年龄<span></span>
+          </div>
+          <div class="liRight flt">
+            <select id="customerAge" class="age_down"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20"  selected="selected">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option><option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option><option value="49">49</option><option value="50">50</option><option value="51">51</option><option value="52">52</option><option value="53">53</option><option value="54">54</option><option value="55">55</option><option value="56">56</option><option value="57">57</option><option value="58">58</option><option value="59">59</option><option value="60">60</option><option value="61">61</option><option value="62">62</option><option value="63">63</option><option value="64">64</option><option value="65">65</option></select>
+          </div>
+        </li>
+        <li class="clr">
+          <div class="liLeft sex flt">
+            是否吸烟
+          </div>
+          <div class="liRight flt">
+            <label class="radio"  for="noSmoke"><input type="radio" name="smoke" class="radioSmoke radioSmokeN" value="非吸烟" id="noSmoke" checked="checked"><i></i>非吸烟</label>
+            <label class="radio"  for="smoke"><input type="radio" name="smoke" class="radioSmoke radioSmokeY" id="smoke"value="吸烟"><i></i>吸烟</label>
+          </div>
+        </li>
+        <li class="clr">
+          <div class="liLeft sex flt">
+            保障年限
+          </div>
+          <div class="liRight flt">
+            至100周岁
+          </div>
+        </li>
+        <li class="clr">
+          <div class="liLeft sex flt">
+            供款年期
+          </div>
+          <div class="liRight flt">
+            <label class="radio"  for="years10"><input type="radio" name="years" class="radioYears" value="10" id="years10" checked="checked"><i></i>10年</label>
+            <label class="radio"  for="years18"><input type="radio" name="years" class="radioYears" id="years18"value="18"><i></i>18年</label>
+            <label class="radio"  for="years25"><input type="radio" name="years" class="radioYears" id="years25"value="25"><i></i>25年</label>
+          </div>
+        </li>
+        <li class="clr">
+          <div class="liLeft sex flt">
+            基本保额
+          </div>
+          <div class="liRight flt">
+            100,000美元
+          </div>
+        </li>
+      </ul>
+      <p class="coverageTip">*基本保额默认以$10万美元为例</p>
+    </form>
+  </section>
+  <footer class="clr">
+    <div class="totalPremium flt">每年保费 $<i id="premium"></i></div>
+    <div class="doPlan frt">生成计划书</div>
+  </footer>
+
+</body>
+</html>
