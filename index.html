@@ -2,11 +2,57 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>首页</title>
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="format-detection" content="email=no" />
+  <meta name="format-detection" content="address=no" />
+  <meta name="format-detection" content="date=no" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>五款香港保险</title>
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/jquery.min.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.pep').click(function(event) {
+        window.location.href = "html/customerInfo.html?insurance=pep";
+      });
+      $('.pe').click(function(event) {
+        window.location.href = "html/customerInfo.html?insurance=pe";
+      });
+      $('.bpp2').click(function(event) {
+        window.location.href = "html/customerInfo2.html?insurance=bpp2";
+      });
+      $('.egs').click(function(event) {
+        window.location.href = "html/customerInfo2.html?insurance=egs";
+      });
+      $('.axa').click(function(event) {
+        window.location.href = "html/customerInfo2.html?insurance=axa";
+      });
+    });
+  </script>
 </head>
 <body>
-
+  <div class="header">
+    <image src="img/index/header.png"></image>
+</div>
+<ul class="insurance">
+    <div class="insurance-img pep">
+        <image src="img/index/yb_jy.png"></image>
+    </div>
+    <div class="insurance-img pe">
+        <image src="img/index/jiayubeian.png"></image>
+    </div>
+    <div class="insurance-img ybcy bpp2">
+        <image src="img/index/yb_cy.png"></image>
+    </div>
+    <div class="insurance-img bcys egs">
+        <image src="img/index/juansheng.png"></image>
+    </div>
+    <div class="insurance-img asaj axa">
+        <image src="img/index/anjin.png"></image>
+    </div>
+</ul>
 </body>
 </html>

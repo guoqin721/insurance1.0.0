@@ -2,26 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="Keywords" content="">
   <meta name="Description" content="">
   <meta name="format-detection" content="telephone=no" />
   <meta name="format-detection" content="email=no" />
   <meta name="format-detection" content="address=no" />
   <meta name="format-detection" content="date=no" />
-  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
   <title>生成计划书</title>
   <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="../css/style.css">
   <script src="../js/jquery.min.js" charset="utf-8"></script>
   <script type="text/javascript">
   $(document).ready(function() {
+    var _href = window.location.href;
+    var insurance = _href.split('?')[1].split('=')[1];
     var customerSex = $('.radioSex:checked').val();
     var customerSmoke = $('.radioSmoke:checked').val();
     var customerYears =$('.radioYears:checked').val();
     var customerAge = $('#customerAge option:selected').val();
     total();
+    //储蓄险的颜色
+    if(insurance == "pep") {
+      $('.companyInfo').html('友邦加裕倍安保加强版');
+      $('title').html('友邦加裕倍安保加强版');
+    } else if (insurance == "pe") {
+      $('.companyInfo').html('友邦加裕倍安保');
+      $('title').html('友邦加裕倍安保');
+    }
+    //输入
     $('#customerAge').on('change',function(){
       customerAge = $('#customerAge option:selected').val();
       if (customerAge <= 16) {
@@ -46,7 +55,7 @@
       total();
     })
     $('.doPlan').click(function(event) {
-      window.location.href = "planbook.html?customerSex=" + customerSex + "&customerSmoke=" + customerSmoke + "&customerYears=" + customerYears + "&customerAge=" + customerAge;
+      window.location.href = "planbook.html?customerSex=" + customerSex + "&customerSmoke=" + customerSmoke + "&customerYears=" + customerYears + "&customerAge=" + customerAge + "&insurance=" + insurance;
     });
     //更新数据
     function total(){
@@ -65,7 +74,7 @@
       }
       type  = typeSex + ytpeSmoke;
       $.ajax({
-        url: 'http://api.fundusd.com/v1/insurance/plans/pep?period='+ customerYears + '&age=' + customerAge + '&type=' + type,
+        url: 'http://api.fundusd.com/v1/insurance/plans/' + insurance +'?period='+ customerYears + '&age=' + customerAge + '&type=' + type,
         type: 'GET',
         success:function(data){
           $('#premium').html(data[parseInt(customerAge) + 1].total);
@@ -89,7 +98,7 @@
       投保人信息
     </div>
     <form class="" action="" method="post">
-      <ul class="companyInfoUl">
+      <ul class="companyInfoUl" id="companyInfoUl">
         <li class="clr">
           <div class="liLeft sex flt">
             性别<span></span>

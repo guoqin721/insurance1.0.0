@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="format-detection" content="email=no" />
+  <meta name="format-detection" content="address=no" />
+  <meta name="format-detection" content="date=no" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>生成计划书</title>
+  <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/jquery.min.js" charset="utf-8"></script>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    var _href = window.location.href;
+    var insurance = _href.split('?')[1].split('=')[1];
+    var customerSex = $('.radioSex:checked').val();
+    var customerSmoke = "无关";
+    var coverAge = $('.radioMoney:checked').val();
+    var customerYears =$('.radioYears:checked').val();
+    var customerAge = $('#customerAge').val();
+    var slideOption = $('#customerAge option').clone(false);
+    var selectLength = 70;
+    if(insurance == "bpp2") {
+      $('.companyInfo').html('友邦充裕未来储蓄计划');
+      $('title').html('友邦充裕未来储蓄计划');
+    } else if (insurance == "egs") {
+      $('.companyInfo').html('保诚隽升储蓄计划');
+      $('title').html('保诚隽升储蓄计划');
+    }  else {
+      $('.companyInfo').html('安盛安进储蓄计划');
+      $('title').html('安盛安进储蓄计划');
+    }
+    createSelect(selectLength);
+    total();
+    //输入
+    $('#customerAge').on('change',function(){
+      customerAge = $('#customerAge').val();
+      console.log(customerAge);
+    })
+    $('.radioSex').on('change',function(){
+      customerSex = $('.radioSex:checked').val();
+      total();
+    })
+    $('.radioMoney').on('change',function(){
+      coverAge = $('.radioMoney:checked').val();
+      total();
+    })
+    $('.radioYears').on('change',function(){
+      customerYears =$('.radioYears:checked').val();
+      if (customerYears == 5) {
+         selectLength = 70;
+      } else {
+        selectLength = 75;
+      }
+      createSelect(selectLength);
+      total();
+    })
+    $('.doPlan').click(function(event) {
+      window.location.href = "planbook.html?customerSex=" + customerSex + "&customerSmoke=" + customerSmoke + "&customerYears=" + customerYears + "&customerAge=" + customerAge + "&insurance=" + insurance  +'&coverage=' + coverAge;
+    });
+    //更新数据
+    function total(){
+      var type = '';
+      if (customerSex == "女") {
+        type = "FN";
+      } else {
+        type = "MN";
+      }
+      console.log(insurance);
+      console.log(coverAge);
+      console.log(customerYears);
+      console.log(type);
+      console.log(customerAge);
+      $.ajax({
+        url: 'http://api.fundusd.com/v1/insurance/plans/' + insurance +'?coverage=' + coverAge + '&period='+ customerYears + '&type=' + type + '&age=' + customerAge,
+        type: 'GET',
+        success:function(data){
+          console.log(data);
+          $('#premium').html(data[parseInt(customerAge) + 1].money);
+        },
+        error:function(){
+          console.log("error");
+        }
+      });
+    }
+    //select的长度
+    function createSelect(selectLength){
+      var slideOptionDom = "";
+      $('#customerAge').empty();
+      for(var i = 0; i <= selectLength; i++){
+        slideOptionDom = slideOption.clone(false);
+        slideOptionDom.val(i);
+        slideOptionDom.html(i);
+        $('#customerAge').append(slideOptionDom);
+      }
+    }
+  });
+
+  </script>
+</head>
+<body id="colorPink">
+  <section class="customerImport customerImport2">
+    <div class="companyInfo">
+      产品详情
+    </div>
+    <div class="customerTitle">
+      投保人信息
+    </div>
+    <form class="" action="" method="post">
+      <ul class="companyInfoUl" id="companyInfoUl">
+        <li class="clr">
+          <div class="liLeft sex flt">
+            性别<span></span>
+          </div>
+          <div class="liRight flt">
+            <label class="radio"  for="male"><input type="radio" name="sex" class="radioSex" value="男" id="male" checked="checked"><i></i>男</label>
+            <label class="radio"  for="female"><input type="radio" name="sex" class="radioSex" id="female"value="女"><i></i>女</label>
+          </div>
+        </li>
+        <li class="clr">
+          <div class="liLeft sex flt">
+            供款年期
+          </div>
+          <div class="liRight flt">
+            <label class="radio"  for="years5"><input type="radio" name="years" class="radioYears" value="5" id="years5" checked="checked"><i></i>5年</label>
+            <label class="radio"  for="years10"><input type="radio" name="years" class="radioYears" id="years10"value="10"><i></i>10年</label>
+          </div>
+        </li>
+        <li class="clr">
+          <div class="liLeft sex flt">
+            年龄<span></span>
+          </div>
+          <div class="liRight flt">
+            <select id="customerAge" class="age_down"><option value="0">0</option></select>
+          </div>
+        </li>
+        <li class="clr">
+          <div class="liLeft sex flt">
+            保障年限
+          </div>
+          <div class="liRight flt">
+            至100周岁
+          </div>
+        </li>
+        <li class="clr">
+          <div class="liLeft sex flt">
+            基本保额
+          </div>
+          <div class="liRight flt">
+            <label class="radio"  for="money1"><input type="radio" name="money" class="radioMoney" value="1" id="money1" checked="checked"><i></i>1万</label>
+            <label class="radio"  for="money5"><input type="radio" name="money" class="radioMoney" id="money5"value="5"><i></i>5万</label>
+            <label class="radio"  for="money10"><input type="radio" name="money" class="radioMoney" id="money10"value="10"><i></i>10万</label>
+          </div>
+        </li>
+      </ul>
+      <!-- <p class="coverageTip">*基本保额默认以$10万美元为例</p> -->
+    </form>
+  </section>
+  <footer class="clr">
+    <div class="totalPremium flt">每年保费 $<i id="premium"></i></div>
+    <div class="doPlan frt">生成计划书</div>
+  </footer>
+
+</body>
+</html>

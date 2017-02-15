@@ -1,4 +1,19 @@
 @import "base.less";
+//主页
+image{
+    width: 100%;
+    height: 100%;
+}
+.header{
+    width: 100%;
+}
+.insurance{
+    background: #f2f2f2;
+    margin: .18rem .30rem .16rem;
+}
+.insurance-img{
+    margin-bottom: .18rem;
+}
 // 保险详情planbook
 //commonStyle
 .m30{
@@ -24,7 +39,7 @@ body{
   overflow: hidden;
 }
 //保险信心
-.guarantee{
+.guarantee1{
 	.pl(0.3rem);
 	.pr(0.3rem);
 	position: relative;
@@ -52,6 +67,38 @@ body{
 		position: absolute;
 		.wh(1.07rem,0.07rem);
 		background: url(../img/planbook/Group2.png) no-repeat right center;
+		top: 0.45rem;
+		right: 0.2rem;
+	}
+}
+.guarantee2{
+	.pl(0.3rem);
+	.pr(0.3rem);
+	position: relative;
+	.customerInfo{
+		color: #ff8f8f;
+		font-family: STHeitiSC-Light;
+		font-size: 0.36rem;
+		text-align: center;
+		width: 100%;
+		.pt(0.3rem);
+		.pb(0.23rem);
+	}
+	&:after{
+		display: block;
+		content: "";
+		position: absolute;
+		.wh(1.07rem,0.07rem);
+		background: url(../img/planbook/Group3.png) no-repeat left center;
+		top: 0.45rem;
+		left:0.2rem;
+	}
+	&:before{
+		display: block;
+		content: "";
+		position: absolute;
+		.wh(1.07rem,0.07rem);
+		background: url(../img/planbook/Group4.png) no-repeat right center;
 		top: 0.45rem;
 		right: 0.2rem;
 	}
@@ -197,14 +244,14 @@ body{
   position: relative;
 	.ui-slider-handle{
 		background: url(../img/planbook/btns.png) no-repeat left top;
-		background-size: 0.44rem 0.3rem;
+		background-size: 0.63rem 0.42rem;
 		position:absolute;
-		top:-0.11rem;
-		width:0.44rem;
-		height:0.3rem;
+		top:-0.17rem;
+		width:0.63rem;
+		height:0.42rem;
 	}
 	.ui-slider-range{
-		background-color:#FFF1CB ;
+		background-color:#fccb43 ;
 		height: 0.08rem;
 	}
 }
@@ -441,14 +488,15 @@ body{
 					position: absolute;
 					border-color: #D8D8D8;
 			}
-			.radio input:checked+i:after {
-		    background-color: @bgBlue;
-			}
 			.radio input:checked+i {
 		    border-color: #D8D8D8;
 			}
 		}
+    .radio input:checked+i:after {
+      background-color: @bgBlue;
+    }
 	}
+
 	.coverageTip{
 		font-size: @fontSize24;
 		color: #969696;
@@ -478,4 +526,18 @@ body{
 			.hc(0.98rem);
 			padding:0 0.3rem;
 		}
+}
+#colorPink{
+  .radio input:checked+i:after {
+    background-color: #ff8f8f;
+  }
+  .customerTitle{
+    color: #ff8f8f;
+  }
+  footer .totalPremium{
+    color: #ff8f8f;
+  }
+  footer .doPlan{
+    background:  #ff8f8f;
+  }
 }

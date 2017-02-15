@@ -19,6 +19,8 @@ $(function(){
   $('.customerSmoke').html(hrefArr[1]);
   $('.customerAge').html(hrefArr[3] + '周岁');
   $('.guarDetaAges').html(hrefArr[2]);
+  var insurance = hrefArr[4];
+  var coverAge = hrefArr[5];
   var age = parseInt(hrefArr[3]);
   var period = parseInt(hrefArr[2]);
   var type = '';
@@ -35,6 +37,24 @@ $(function(){
     ytpeSmoke = "N";
   }
   type  = typeSex + ytpeSmoke;
+
+  //title改变
+  if(insurance == "pep") {
+    $('.companyInfo').html('友邦加裕倍安保加强版');
+    $('title').html('友邦加裕倍安保加强版');
+  } else if (insurance == "pe") {
+    $('.companyInfo').html('友邦加裕倍安保');
+    $('title').html('友邦加裕倍安保');
+  } else if (insurance == "bpp2") {
+    $('.companyInfo').html('友邦充裕未来储蓄计划');
+    $('title').html('友邦充裕未来储蓄计划');
+  } else if (insurance == "egs") {
+    $('.companyInfo').html('保诚隽升储蓄计划');
+    $('title').html('保诚隽升储蓄计划');
+  }  else {
+    $('.companyInfo').html('安盛安进储蓄计划');
+    $('title').html('安盛安进储蓄计划');
+  }
   //下拉年龄
   var slideStartAge = parseInt(hrefArr[3]) + 1 ;
   var slideStartYears = 0;
@@ -50,17 +70,15 @@ $(function(){
     $('#customerAge').append(slideOptionDom);
   }
   //slide的宽度
+
   $.ajax({
-    url: 'http://api.fundusd.com/v1/insurance/plans/pep?period='+ period + '&age=' + age + '&type=' + type,
+    url: 'http://api.fundusd.com/v1/insurance/plans/'+ insurance + '?period='+ period + '&age=' + age + '&type=' + type + '&coverage=' + coverAge ,
     type: 'GET',
     success:function(data){
-      $('.guarDetaPremium').html(data[slideStartAge].total);
-      //更高预期储蓄分红内容
-      $('#pre80').html(data["80"].total2);
-      if ( slideStartAge == 66) {
-        $('#pre65').html(0);
+      if (insurance !== "pep" & insurance !== "pe") {
+        $('.guarDetaPremium').html(data[slideStartAge].money);
       } else {
-        $('#pre65').html(data["65"].total2);
+        $('.guarDetaPremium').html(data[slideStartAge].total);
       }
       //判断是否小于18岁
       if (hrefArr[3] < 18) {
@@ -68,6 +86,30 @@ $(function(){
       } else {
         $('.child').css('display','none');
       }
+      //如果是加裕倍安保非加强版
+      if (insurance == "pep") {
+        $('.pep').css('display','block');
+      } else {
+        $('.pep').css('display','none');
+      }
+
+      //储蓄险的颜色
+      if(insurance !== "pep" & insurance !== "pe") {
+        $('.slideDown').css('display','none');
+        $('.planbook').css('backgroundColor','#ff8f8f');
+        $('.tele').css('background','#68bdf2');
+        $('.footerTip').css('background','#ff8f8f');
+        $('.guarantee1').css('display','none');
+        $('.totalPrem').html('总保费');
+        $('.sgpcbz').html('身故赔偿保证金额');
+        $('.sgpczje').html('身故赔偿总金额');
+        $('.xjjzbz').html('现金价值保证金额');
+        $('.xjjzzje').html('现金价值总金额');
+        $('.guarDetaCoverage').html(period * coverAge * 10000);
+      }else{
+        $('.guarantee2').css('display','none');
+      }
+
       for(var key in data){
         dataKey.push(key);
       }
@@ -124,12 +166,19 @@ $(function(){
   function dataChange(data) {
     for (var key in data) {
       if (key == dataKey[currentPosition]) {
-        $('#zj').html(data[key].total1);
-        $('#qj').html(data[key].fbz1*0.2 + 20000);
-        $('#sg').html(data[key].total1);
-        $('#xj').html(data[key].total2);
         $('#customerAge option').removeAttr('selected')
         $('#customerAge').val(currentPosition + slideStartAge);
+        if(insurance !== "pep" & insurance !== "pe") {
+          $('#zj').html(data[key].bz2);
+          $('#qj').html(data[key].total);
+          $('#sg').html(data[key].bz1);
+          $('#xj').html(data[key].total1);
+        }else{
+          $('#zj').html(data[key].total1);
+          $('#qj').html(data[key].fbz1*0.2 + 20000);
+          $('#sg').html(data[key].total1);
+          $('#xj').html(data[key].total2);
+        }
       }
     }
   }
